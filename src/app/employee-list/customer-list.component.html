@@ -1,0 +1,43 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2>Customer List</h2>
+  </div>
+  <div class="panel-body">
+    <form [formGroup]="searchForm" (ngSubmit)="submitSearch()">
+      <div class="form-group">
+        <label>Country</label>
+        <input type="text" formControlName="country" class="form-control" [ngClass]="{ 'is-invalid': submitted && formGroupControls.country.errors }" />
+      </div>
+
+      <div class="form-group">
+        <label>Valid</label>
+        <input type="text" formControlName="valid" class="form-control" [ngClass]="{ 'is-invalid': submitted && formGroupControls.valid.errors }" />
+      </div>
+
+      <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary btn-style text-center-align">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Search
+        </button>
+      </div>
+    </form>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Country</th>
+          <th>Valid</th>
+          <th>Country Code</th>
+          <th>Phone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let customer of customers | async">
+          <td>{{customer.country}}</td>
+          <td>{{customer.valid}}</td>
+          <td>{{customer.countryCode}}</td>
+          <td>{{customer.phone}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
